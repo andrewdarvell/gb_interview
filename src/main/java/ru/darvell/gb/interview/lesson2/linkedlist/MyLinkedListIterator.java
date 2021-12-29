@@ -12,6 +12,10 @@ public class MyLinkedListIterator<E> implements Iterator<E> {
         this.firstNode = firstNode;
     }
 
+    public MyLinkedListIterator(Node<E> firstNode, int index) {
+        this.firstNode = firstNode;
+    }
+
     @Override
     public boolean hasNext() {
         return (cursor == null) ? firstNode != null : cursor.getNext() != null;
@@ -22,5 +26,9 @@ public class MyLinkedListIterator<E> implements Iterator<E> {
         if (!hasNext()) throw new NoSuchElementException();
         cursor = (cursor == null) ? firstNode : cursor.getNext();
         return cursor.getValue();
+    }
+
+    Node<E> getCursorNode() {
+        return cursor;
     }
 }
