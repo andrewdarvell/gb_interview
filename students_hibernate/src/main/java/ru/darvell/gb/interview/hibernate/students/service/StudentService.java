@@ -3,6 +3,7 @@ package ru.darvell.gb.interview.hibernate.students.service;
 import ru.darvell.gb.interview.hibernate.students.dao.AbstractCrudDao;
 import ru.darvell.gb.interview.hibernate.students.domain.Student;
 
+import java.util.List;
 import java.util.Optional;
 
 public class StudentService {
@@ -22,6 +23,10 @@ public class StudentService {
 
     public void delete(Student student) {
         getDao().delete(student);
+    }
+
+    public List<Student> getAllStudents() {
+        return getDao().getAll(Student.class, "from student");
     }
 
     AbstractCrudDao<Student> getDao() {

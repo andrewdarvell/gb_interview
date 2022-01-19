@@ -15,7 +15,7 @@ public class Application {
         flyway.migrate();
 
         var studentService = new StudentService();
-        studentService.addStudent(Student.builder().mark("123").name("Антон").build());
+        createStudents(studentService);
 
         System.out.println(
                 studentService.getStudentById(2).orElseThrow(EntityNotFoundException::new)
@@ -28,7 +28,17 @@ public class Application {
         studentService.updateStudent(studentToEdit);
 
         studentService.delete(
-                studentService.getStudentById(12).orElseThrow(EntityNotFoundException::new)
+                studentService.getStudentById(24).orElseThrow(EntityNotFoundException::new)
         );
+
+        studentService.getAllStudents().forEach(s -> {System.out.println(s.getName());});
     }
+
+    static void createStudents(StudentService service) {
+        for (int i=0; i<1000; i++) {
+            service.addStudent(Student.builder().mark("123"+i).name("Студент_" + i).build());
+        }
+    }
+
+
 }
