@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Студенты</title>
+    <style>
+        .my-container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+<body>
+
+
+<div class="container">
+
+    <form action="#" th:action="@{/students}" th:object="${studentToEdit}" method="POST" enctype="multipart/form-data">
+
+        <h4 th:text="${action}">Действие</h4>
+
+        <input type="hidden" th:field="*{id}" readonly/>
+
+        <div class="form-group">
+            <label for="name">Имя</label>
+            <input class="form-control" id="name" type="text" th:field="*{name}"/>
+        </div>
+        <div class="form-group">
+            <label for="age">Возраст</label>
+            <input class="form-control" id="age" type="number" th:field="*{age}"/>
+        </div>
+        <p><input type="submit" value="Сохранить"/>
+            </p>
+    </form>
+    <br>
+    <a th:href="@{/students}" href="#" class="btn btn-primary"><span>Добавить нового</span></a>
+    <br>
+    <h3>Студенты</h3>
+    <div class="my-container">
+        <div class="card" style="width: 18rem;" th:each="s : ${studentsList}">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${s.id}">Card title</h5>
+                <h6 class="card-subtitle mb-2 text-muted" th:text="${s.name}">Card subtitle</h6>
+                <h6 class="card-subtitle mb-2 text-muted" th:text="${s.age}">Card subtitle</h6>
+
+                <a th:href="@{/students/{id}(id = ${s.id})}" href="#" class="btn btn-primary"><span>Изменить</span></a>
+                <a th:href="@{/students/delete/{id}(id = ${s.id})}" href="#" class="btn"><span>Удалить</span></a>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+</body>
+
+</html>
